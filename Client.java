@@ -53,7 +53,7 @@ public class  Client extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent evt) {
         if ( evt.getSource() == tastoEsci ) {
-            stampa.println("Chiudi");  // bottone di chiusura della connessione col server
+            stampa.println("Chiudi");  // bottone di chiusura della connessione con il server
             System.exit(0);
         } else {
             // invia messaggio al server
