@@ -9,7 +9,7 @@ import java.awt.event.*;
 import static java.lang.System.out;
 
 public class  Client extends JFrame implements ActionListener {
-    String stringa;
+    String utente;
     PrintWriter stampa;
     BufferedReader lettura;
     JTextArea  Messaggio;
@@ -17,13 +17,13 @@ public class  Client extends JFrame implements ActionListener {
     JButton tastoInvia,tastoEsci;
     Socket client;
     
-    public Client(String stringa,String servername) throws Exception {
-        super(stringa); 
-        this.stringa = stringa;
-        client  = new Socket(servername,8080);
+    public Client(String utente,String server) throws Exception {
+        super(utente); 
+        this.utente = utente;
+        client  = new Socket(server,8080);
         lettura = new BufferedReader( new InputStreamReader( client.getInputStream()) ) ;
         stampa = new PrintWriter(client.getOutputStream(),true);
-        stampa.println(stringa);  // invia il nome del client al server
+        stampa.println(utente);  // invia il nome del client al server
         buildInterface();
         new MessagesThread().start();  // thread di attesa dei messaggi in arrivo
     }
@@ -66,9 +66,9 @@ public class  Client extends JFrame implements ActionListener {
         // inserisci il nome utente
         String name = JOptionPane.showInputDialog(null,"Inserisci il tuo nome :", "Nome utente",
              JOptionPane.PLAIN_MESSAGE);
-        String servername = "localhost";  
+        String server = "localhost";  
         try {
-            new Client( name ,servername);
+            new Client( name ,server);
         } catch(Exception ex) {
             out.println( "Errore --> " + ex.getMessage());
         }
